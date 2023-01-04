@@ -31,6 +31,18 @@ namespace CyclingMates.Models
             Title = title;
             AuthorID = authorID;
         }
+
+        public Activity(Activity activity)
+        {
+            ID = activity.ID;
+            PublishedDateTime = activity.PublishedDateTime;
+            AuthorID = activity.AuthorID;
+            Title = activity.Title;
+            Description = activity.Description;
+            Place = activity.Place;
+            Date = activity.Date;
+            Image = activity.Image;
+        }
     }
 }
 

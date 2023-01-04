@@ -1,4 +1,7 @@
-﻿@{
+﻿
+@model IEnumerable<CyclingMates.Models.ActivityDisplay>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +9,26 @@
     <h1 class="display-4">Welcome</h1>
 </div>
 
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-12">
+            @foreach (var item in Model)
+            {
+                <div class="post mb-3" style="background-color: #e1dbdb; padding: 14px; border-radius: 8px;">
+
+                    <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+                    <p>from: @Html.DisplayFor(model => item.Author.Name)</p>
+                    <p>@Html.DisplayFor(model => item.Description)</p>
+                    <br />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                        <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                        <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                    </svg>
+                    <p>@Html.DisplayFor(model => item.Place)</p>
+                    <img src="@Html.DisplayFor(model => item.Image)" style="width: 100%" />
+                    <p>@Html.DisplayFor(model => item.PublishedDateTime)</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

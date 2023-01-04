@@ -12,6 +12,9 @@ public class CyclingMatesIdentityDbContext : IdentityDbContext<CyclingMatesUser>
     {
     }
 
+    public CyclingMatesIdentityDbContext()
+    { }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
