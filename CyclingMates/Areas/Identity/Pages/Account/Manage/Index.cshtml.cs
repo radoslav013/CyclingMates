@@ -7,12 +7,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using CyclingMates.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CyclingMates.Areas.Identity.Pages.Account.Manage
 {
+    [AllowAnonymous]
     public class IndexModel : PageModel
     {
         private readonly UserManager<CyclingMatesUser> _userManager;

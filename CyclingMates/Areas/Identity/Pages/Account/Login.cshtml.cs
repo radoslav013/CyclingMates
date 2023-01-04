@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
@@ -18,6 +18,7 @@ using CyclingMates.Areas.Identity.Data;
 
 namespace CyclingMates.Areas.Identity.Pages.Account
 {
+    [AllowAnonymous]
     public class LoginModel : PageModel
     {
         private readonly SignInManager<CyclingMatesUser> _signInManager;
