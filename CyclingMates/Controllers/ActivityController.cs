@@ -25,9 +25,14 @@ namespace CyclingMates.Controllers
         // GET: Activity
         public async Task<IActionResult> Index()
         {
-              return _context.Activities != null ? 
-                          View(await _context.Activities.ToListAsync()) :
-                          Problem("Entity set 'CyclingMatesContext.Activities'  is null.");
+            if(_context.Activities != null)
+            {
+                List<Activity> activities = await _context.Activities.ToListAsync();
+                string? userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+               
+                return View(activities.Where(e => e.AuthorID == userId));
+            }
+            return Problem("Entity set 'CyclingMatesContext.Activities'  is null.");
         }
 
         // GET: Activity/Details/5
@@ -59,7 +64,7 @@ namespace CyclingMates.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title")] Activity activity)
+        public async Task<IActionResult> Create([Bind("ID,Title,Description,Place,Date,Image")] Activity activity)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +78,8 @@ namespace CyclingMates.Controllers
             "Try again, and if the problem persists " +
             "see your system administrator.");
                 }
-                
+
+                activity.PublishedDateTime = DateTime.Now;
                 _context.Add(activity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -102,7 +108,7 @@ namespace CyclingMates.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title")] Activity activity)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Description,Place,Date,Image")] Activity activity)
         {
             if (id != activity.ID)
             {
@@ -117,6 +123,7 @@ namespace CyclingMates.Controllers
                     if (activitySaved != null)
                     {
                         activity.AuthorID = activitySaved.AuthorID;
+                        activity.PublishedDateTime = activitySaved.PublishedDateTime;
                     }
                     _context.ChangeTracker.Clear();
                     _context.Update(activity);

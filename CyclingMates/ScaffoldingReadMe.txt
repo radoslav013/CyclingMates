@@ -8,4 +8,5 @@ Future improvements:
     a. Admin
     b. Users
 2. Login with Facebook/Google
-3. 
+3. Enforce HTTPS
+. Deploy to Azure
